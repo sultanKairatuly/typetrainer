@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Type Train</title>
+  </head>
+  <body>
+    <div class="app">
+      <div class="modes">
+        <div class="mode" data-type="short">Короткие слова</div>
+        <div class="mode" data-type="long">Длинные слова</div>
+      </div>
+      <div class="content">
+        <div class="timer"></div>
+        <div class="words">
+          <div class="div">
+            <div class="start">
+              <span></span>
+              <span></span>
+            </div>
+            <div class="sentences">
+              <span class="done"></span>
+              <span class="undone"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
