@@ -51,19 +51,42 @@ $gray: #d7d7d7;
 .start {
   display: flex;
   column-gap: 30px;
+  width: 100%;
+  justify-content: center;
+
   & span {
     font-size: 50px;
     letter-spacing: 5px;
     font-weight: lighter;
     font-family: "Times New Roman", Times, serif;
+    width: 50%;
+  }
+
+  & span:first-child {
+    text-align: right;
   }
 }
 .sentences {
   display: flex;
+  width: 100%;
+  justify-content: center;
 }
 .done {
+  width: 50%;
+  text-align: right;
+  font-size: 50px;
+  font-family: "Times New Roman", Times, serif;
+  overflow: hidden;
+  white-space: nowrap;
+  direction: rtl;
+  white-space: pre;
 }
 .undone {
+  width: 50%;
+  font-size: 50px;
+  font-family: "Times New Roman", Times, serif;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .hand {

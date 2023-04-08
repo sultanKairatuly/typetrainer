@@ -1,4 +1,4 @@
 export type Words = {
-    short: string[],
-    long: string[]
-}
+  short: string;
+  long: string;
+};
