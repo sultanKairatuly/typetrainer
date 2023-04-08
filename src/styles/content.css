@@ -1,0 +1,185 @@
+$red: #d9b1af;
+$yellow: #e2e0b2;
+$green: #b8e1b4;
+$blue: #b8e0dd;
+$pink: #d7afdf;
+$purple: #afafdd;
+$gray: #d7d7d7;
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #4ca8f8;
+  width: 100%;
+  height: 100vh;
+}
+.timer {
+  background-color: #fff;
+  border: 5px solid #9eb3ce;
+  padding: 5px 10px;
+  border-radius: 5px;
+  width: fit-content;
+  font-size: 18px;
+  margin-bottom: 100px;
+}
+.words {
+  padding: 10px;
+  background-color: #fff;
+  border: 8px solid #9eb3ce;
+  min-width: 900px;
+  width: 80%;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  overflow-x: hidden;
+  position: relative;
+  margin-bottom: 40px;
+}
+
+.gray-wrapper {
+  position: absolute;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0.8;
+  width: 50%;
+  background-color: rgb(233, 233, 233);
+}
+
+.start {
+  display: flex;
+  column-gap: 30px;
+  & span {
+    font-size: 50px;
+    letter-spacing: 5px;
+    font-weight: lighter;
+    font-family: "Times New Roman", Times, serif;
+  }
+}
+.sentences {
+  display: flex;
+}
+.done {
+}
+.undone {
+}
+
+.hand {
+  background-image: url("../../public/hands.png");
+  background-size: cover;
+  width: 190px;
+  height: 190px;
+  background-repeat: no-repeat;
+}
+
+.left-hand {
+  background-position: 0 0;
+}
+.keyboard {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 3px;
+  background-color: #9eb3ce;
+}
+
+.row {
+  max-width: 100%;
+  display: flex;
+  column-gap: 2px;
+}
+
+.key {
+  padding: 5px 15px;
+  border-radius: 5px;
+  border: 1px solid #000;
+  background-color: $red;
+  text-align: center;
+}
+
+.space {
+  background-color: $purple;
+  width: 100%;
+}
+
+.gray {
+  background-color: $gray;
+}
+
+.red {
+  background-color: $red;
+}
+
+.blue {
+  background-color: $blue;
+}
+
+.green {
+  background-color: $green;
+}
+
+.yellow {
+  background-color: $yellow;
+}
+
+.pink {
+  background-color: $pink;
+}
+
+.purple {
+  background-color: $purple;
+}
+
+.tab {
+  width: 65px;
+}
+
+.slash {
+  width: 60px;
+}
+
+.shift {
+  letter-spacing: 2px;
+  padding: 5px 30px;
+  width: 100%;
+}
+
+.ctrl {
+  font-size: 16px;
+  padding: 5px 10px;
+}
+
+.cmd {
+  font-size: 16px;
+  padding: 5px 10px;
+}
+
+.alt {
+  font-size: 16px;
+  padding: 5px 10px;
+}
+
+.backspace {
+  padding: 5px 0px;
+  width: 88px;
+  font-size: 16px;
+}
+
+.enter {
+  padding: 5px 12px;
+}
+.caps-lock {
+  font-size: 15px;
+  padding: 5px 10px;
+}
+
+.right-hand {
+  background-position: -190px 0;
+}
+
+.visualisation {
+  display: flex;
+  column-gap: 30px;
+}
