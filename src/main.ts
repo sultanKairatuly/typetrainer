@@ -58,14 +58,25 @@ if (keys) {
 
 toggleSentence();
 
+keys?.forEach((key: HTMLElement) => {
+  if (undoneWords.textContent) {
+    if (key.dataset.key === undoneWords.textContent[0]) {
+      key.style.backgroundColor = "red";
+    } else {
+      key.style.backgroundColor = "";
+    }
+  }
+});
+
 function handleModeClick(e: Event): void {
   if (e.target) {
-    modesContainer.style.display = "none";
-    content.style.display = "flex";
     const wordType: keyof typeof words = (e.target as HTMLElement).dataset
       .type as keyof typeof words;
     wordsToType = words[wordType];
-    console.log(wordsToType);
+    modesContainer.style.display = "none";
+    content.style.display = "flex";
+    showStartIntroduction();
+    toggleSentence();
   }
 }
 
@@ -117,6 +128,12 @@ function handleDocumentKeydown(e: KeyboardEvent): void {
 function hideStartIntroduction(): void {
   if (startIntroduction) {
     startIntroduction.style.display = "none";
+  }
+}
+
+function showStartIntroduction(): void {
+  if (startIntroduction) {
+    startIntroduction.style.display = "flex";
   }
 }
 
@@ -174,4 +191,11 @@ function toMenu(): void {
   closeModal(modal);
   content.style.display = "none";
   modesContainer.style.display = "flex";
+  doneWords.textContent = "";
+  undoneWords.textContent = "";
+  userTyping = "";
+  if (timer?.textContent) {
+    timer.textContent = "00:00";
+  }
+  over = false;
 }
