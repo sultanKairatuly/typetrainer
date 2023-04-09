@@ -3,7 +3,7 @@ export function setModal(el: HTMLElement): void {
 }
 
 export function openModal(el: HTMLElement): void {
-  el.style.display = "block";
+  el.style.display = "flex";
 }
 
 export function closeModal(el: HTMLElement): void {

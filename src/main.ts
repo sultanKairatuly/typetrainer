@@ -6,6 +6,10 @@ import { setModal, openModal, closeModal } from "./modules/modal";
 
 export let over: boolean = false;
 
+const content: HTMLElement = document.querySelector(".content") as HTMLElement;
+const modesContainer: HTMLElement = document.querySelector(
+  ".modes"
+) as HTMLElement;
 const modes: NodeListOf<Element> | null = document.querySelectorAll(".mode");
 const keys: NodeListOf<HTMLElement> | null = document.querySelectorAll(".key");
 const startIntroduction: HTMLElement | null = document.querySelector(".start");
@@ -18,21 +22,23 @@ const timer: Element | null = document.querySelector(".timer");
 const modal: HTMLElement = document.querySelector(
   ".modal_wrapper"
 ) as HTMLElement;
-const modalButton: HTMLElement = document.querySelector('.modal_btn') as HTMLElement
+const modalButton: HTMLElement = document.querySelector(
+  ".model_btn"
+) as HTMLElement;
 
 let start: boolean = false;
 
 setModal(modal);
 document.addEventListener("keydown", handleDocumentKeydown);
-modalButton.addEventListener('click', toMenu)
+modalButton.addEventListener("click", toMenu);
 
 const words: Words = {
   short: "привет меня зовут султанбек",
-  long: "",
+  long: "ооочееень длинннноееее соооообббщееениииеее",
 };
 
 let userTyping = "";
-const wordsToType: string = words.short;
+let wordsToType: string = "";
 
 if (modes) {
   modes.forEach((mode: Element) => {
@@ -43,7 +49,7 @@ if (modes) {
 if (keys) {
   keys.forEach((key: HTMLElement) => {
     const keyValue: string = key.dataset.key as string;
-    if (keyValue.toLowerCase() !== "space") {
+    if (keyValue.toLowerCase() !== " ") {
       key.textContent =
         keyValue.length > 1 ? upperFirstChar(keyValue) : keyValue;
     }
@@ -54,7 +60,12 @@ toggleSentence();
 
 function handleModeClick(e: Event): void {
   if (e.target) {
-    const wordType: string | undefined = (e.target as HTMLElement).dataset.type;
+    modesContainer.style.display = "none";
+    content.style.display = "flex";
+    const wordType: keyof typeof words = (e.target as HTMLElement).dataset
+      .type as keyof typeof words;
+    wordsToType = words[wordType];
+    console.log(wordsToType);
   }
 }
 
@@ -67,9 +78,13 @@ function handleDocumentKeydown(e: KeyboardEvent): void {
       setTimer(timer as HTMLElement);
     }
   }
+
   if (undoneWords.textContent) {
+    if (!undoneWords.textContent[1]) {
+      finishExercise();
+    }
+
     if (e.key === undoneWords.textContent[0]) {
-      console.log(undoneWords.textContent.slice(1));
       undoneWords.textContent = undoneWords.textContent.slice(1);
       userTyping += e.key;
       doneWords.textContent = userTyping;
@@ -86,6 +101,16 @@ function handleDocumentKeydown(e: KeyboardEvent): void {
         (doneWords as HTMLElement).style.paddingRight = "0px";
       }
     }
+
+    keys?.forEach((key: HTMLElement) => {
+      if (undoneWords.textContent) {
+        if (key.dataset.key === undoneWords.textContent[0]) {
+          key.style.backgroundColor = "red";
+        } else {
+          key.style.backgroundColor = "";
+        }
+      }
+    });
   }
 }
 
@@ -109,9 +134,44 @@ function toggleSentence(): void {
 function finishExercise(): void {
   over = true;
   openModal(modal);
+  const modalTimer: HTMLElement = modal.querySelector(
+    ".overtime"
+  ) as HTMLElement;
+  if (timer?.textContent) {
+    const [minutes, seconds] = timer.textContent.split(":");
+    function formattedMinutes(): string {
+      if (Number(minutes[1]) === 0) {
+        return "";
+      }
+
+      if (Number(minutes[0]) > 0) {
+        return `${minutes} минут и `;
+      } else {
+        return `${minutes[1]} минут и `;
+      }
+    }
+    function formattedSeconds(): string {
+      if (Number(seconds[1]) === 0) {
+        return "";
+      }
+
+      if (Number(seconds[0]) > 0) {
+        return `${seconds} секунд`;
+      } else {
+        return `${seconds[1]} секунд`;
+      }
+    }
+    if (!formattedMinutes() && !formattedSeconds()) {
+      modalTimer.textContent = "0 секунд";
+    }
+
+    modalTimer.textContent = `${formattedMinutes()}${formattedSeconds()}`;
+  }
 }
 
-
 function toMenu(): void {
-
+  start = false;
+  closeModal(modal);
+  content.style.display = "none";
+  modesContainer.style.display = "flex";
 }
