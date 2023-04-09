@@ -1,6 +1,7 @@
 @import "./styles/null.css";
 @import "./styles/mode.css";
 @import "./styles/content.css";
+@import "./styles/modal.css";
 
 .app {
   font-family: "Arial", sans-serif;

@@ -2,8 +2,10 @@ import "./style.css";
 import { upperFirstChar } from "./modules/utilities";
 import type { Words } from "./types";
 import setTimer from "./modules/timer";
+import { setModal, openModal, closeModal } from "./modules/modal";
 
-const content: Element | null = document.querySelector(".content");
+export let over: boolean = false;
+
 const modes: NodeListOf<Element> | null = document.querySelectorAll(".mode");
 const keys: NodeListOf<HTMLElement> | null = document.querySelectorAll(".key");
 const startIntroduction: HTMLElement | null = document.querySelector(".start");
@@ -12,12 +14,17 @@ const sentence: HTMLElement = document.querySelector(
 ) as HTMLElement;
 const doneWords: Element = sentence.firstElementChild!;
 const undoneWords: Element = sentence.lastElementChild!;
-
-const timer = document.querySelector(".timer");
+const timer: Element | null = document.querySelector(".timer");
+const modal: HTMLElement = document.querySelector(
+  ".modal_wrapper"
+) as HTMLElement;
+const modalButton: HTMLElement = document.querySelector('.modal_btn') as HTMLElement
 
 let start: boolean = false;
 
+setModal(modal);
 document.addEventListener("keydown", handleDocumentKeydown);
+modalButton.addEventListener('click', toMenu)
 
 const words: Words = {
   short: "привет меня зовут султанбек",
@@ -66,6 +73,18 @@ function handleDocumentKeydown(e: KeyboardEvent): void {
       undoneWords.textContent = undoneWords.textContent.slice(1);
       userTyping += e.key;
       doneWords.textContent = userTyping;
+
+      if (undoneWords.textContent[0] === " ") {
+        (undoneWords as HTMLElement).style.paddingLeft = "10px";
+      } else {
+        (undoneWords as HTMLElement).style.paddingLeft = "0px";
+      }
+
+      if (doneWords.textContent[doneWords.textContent.length - 1] === " ") {
+        (doneWords as HTMLElement).style.paddingRight = "10px";
+      } else {
+        (doneWords as HTMLElement).style.paddingRight = "0px";
+      }
     }
   }
 }
@@ -82,6 +101,17 @@ function toggleSentence(): void {
       sentence.style.display = "none";
     } else {
       sentence.style.display = "flex";
+      undoneWords.textContent = wordsToType;
     }
   }
+}
+
+function finishExercise(): void {
+  over = true;
+  openModal(modal);
+}
+
+
+function toMenu(): void {
+
 }
