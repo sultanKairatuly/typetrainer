@@ -1,6 +1,6 @@
 import "./style.css";
 import { upperFirstChar } from "./modules/utilities";
-import type { Words } from "./types";
+import type { Words, Display } from "./types";
 import setTimer from "./modules/timer";
 import { setModal, openModal, closeModal } from "./modules/modal";
 
@@ -25,10 +25,18 @@ const modal: HTMLElement = document.querySelector(
 const modalButton: HTMLElement = document.querySelector(
   ".model_btn"
 ) as HTMLElement;
+const manageItems: NodeListOf<HTMLElement> =
+  document.querySelectorAll(".manage_item");
+const backButton = document.querySelector(".back_btn");
 
 let start: boolean = false;
 
 setModal(modal);
+
+backButton?.addEventListener("click", goBackToModes);
+manageItems.forEach((manage: HTMLElement) => {
+  manage.addEventListener("click", handleManageClick);
+});
 document.addEventListener("keydown", handleDocumentKeydown);
 modalButton.addEventListener("click", toMenu);
 
@@ -198,4 +206,73 @@ function toMenu(): void {
     timer.textContent = "00:00";
   }
   over = false;
+}
+
+function handleManageClick(e: Event): void {
+  const target: EventTarget | null = e.target;
+  if (target) {
+    const targetElement: HTMLElement = target as HTMLElement;
+    if (targetElement.dataset.setting === "keyboard") {
+      if (keys) {
+        const elToToggle: HTMLElement = keys[0].parentElement
+          ?.parentElement as HTMLElement;
+        toggleSimpleSetting(
+          targetElement,
+          "keyboard-setting",
+          "nokeyboard-setting",
+          "flex",
+          elToToggle
+        );
+      }
+    } else if (targetElement.dataset.setting === "hands") {
+      const leftHand: HTMLElement = document.querySelector(
+        ".left-hand"
+      ) as HTMLElement;
+      const rightHand: HTMLElement = document.querySelector(
+        ".right-hand"
+      ) as HTMLElement;
+
+      toggleSimpleSetting(
+        targetElement,
+        "hands-setting",
+        "nohands-setting",
+        "block",
+        leftHand,
+        rightHand
+      );
+    } else {
+    }
+  }
+}
+
+function toggleSimpleSetting(
+  targetElement: HTMLElement,
+  activeClass: string,
+  disactiveClass: string,
+  shownDisplay: Display,
+  ...elsToToggle: HTMLElement[]
+): void {
+  const isActive = targetElement.classList.contains(activeClass);
+  if (isActive) {
+    targetElement.classList.remove(activeClass);
+    targetElement.classList.add(disactiveClass);
+    if (elsToToggle) {
+      elsToToggle.forEach((elToToggle: HTMLElement) => {
+        elToToggle.style.display = "none";
+      });
+    }
+  } else {
+    targetElement.classList.remove(disactiveClass);
+    targetElement.classList.add(activeClass);
+    if (elsToToggle) {
+      elsToToggle.forEach((elToToggle: HTMLElement) => {
+        elToToggle.style.display = shownDisplay;
+      });
+    }
+  }
+}
+
+function goBackToModes(): void {
+  content.style.display = "none";
+  modesContainer.style.display = "flex";
 }

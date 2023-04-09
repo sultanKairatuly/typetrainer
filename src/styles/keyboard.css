@@ -1,0 +1,109 @@
+$red: #d9b1af;
+$yellow: #e2e0b2;
+$green: #b8e1b4;
+$blue: #b8e0dd;
+$pink: #d7afdf;
+$purple: #afafdd;
+$gray: #d7d7d7;
+
+.keyboard {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 3px;
+  background-color: #9eb3ce;
+}
+
+.row {
+  max-width: 100%;
+  display: flex;
+  column-gap: 2px;
+}
+
+.key {
+  padding: 5px 15px;
+  border-radius: 5px;
+  border: 1px solid #000;
+  background-color: $red;
+  text-align: center;
+}
+
+.space {
+  background-color: $purple;
+  width: 100%;
+}
+
+.gray {
+  background-color: $gray;
+}
+
+.red {
+  background-color: $red;
+}
+
+.blue {
+  background-color: $blue;
+}
+
+.green {
+  background-color: $green;
+}
+
+.yellow {
+  background-color: $yellow;
+}
+
+.pink {
+  background-color: $pink;
+}
+
+.purple {
+  background-color: $purple;
+}
+
+.tab {
+  width: 65px;
+}
+
+.slash {
+  width: 60px;
+}
+
+.shift {
+  letter-spacing: 2px;
+  padding: 5px 30px;
+  width: 100%;
+}
+
+.ctrl {
+  font-size: 16px;
+  padding: 5px 10px;
+}
+
+.cmd {
+  font-size: 16px;
+  padding: 5px 10px;
+}
+
+.alt {
+  font-size: 16px;
+  padding: 5px 10px;
+}
+
+.backspace {
+  padding: 5px 0px;
+  width: 88px;
+  font-size: 16px;
+}
+
+.enter {
+  padding: 5px 12px;
+}
+.caps-lock {
+  font-size: 15px;
+  padding: 5px 10px;
+}
+
+.right-hand {
+  background-position: -190px 0;
+}
